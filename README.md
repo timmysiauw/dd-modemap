@@ -221,11 +221,19 @@ The center can be retrieved in the workspace using `var center = modemap.get_que
 
 Then `[37.7338312, -122.417149]` can be replaced with `[center.LAT, center.LNG]`. 
 
-
 ### Map Titles 
 You can insert titles for your plot using simple HTML tags inserted directly on top of the map `div`. For example, `<h2>Example 1: Simple Plot</h2>` can create a title for the first example map. 
 
 ### Handling Geohashes 
+`modemap` has two built-in functions to handle geohashes: `modemap.geohash.encode` and `modemap.geohash.decode`. The `encode` function has signature `function(lat, lng)` and returns a 12-character geohash for the coordinate. The geohash can be truncated to shorter geohashes [TODO: add an optional parameter to truncate this]. The `decode` function has signature `function(geohash)` and returns a JSON with the following format 
+
+```
+{
+  lat: lat, 
+  lng: lng, 
+  corners: [[lat, lng], [lat, lng]]
+}
+```
 
 ## Troubleshooting
 * If you have any unrun queries in your list of queries, then no maps will show up, i.e., you will get a Javascript error.
