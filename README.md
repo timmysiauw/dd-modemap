@@ -155,6 +155,8 @@ The output is a map object.
 
 Note that each geojson is clickable, which shows a popup of the geojson value. 
 
+A GeoJSON column can be created using `ST_ASGEOJSON(TRY_TO_GEOMETRY(geom))`, where `geom` is a [geometry](https://docs.snowflake.com/en/sql-reference/data-types-geospatial.html#geometry-data-type) object commonly found in many GEO_INTELLIGENCE tables. 
+
 ### Example 4: Geojsons with JET color scheme 
 
 Between the `<script>` and `</script>` tags, insert 
