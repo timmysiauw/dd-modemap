@@ -200,6 +200,8 @@ The inputs are
   
 #### Example 5: Any Function 
 
+Between the `<script>` and `</script>` tags, insert 
+
 ```
 var center = modemap.get_query_content('zzz. san francisco center')[0]
 var m = modemap.init_map('example-5', [center.LAT, center.LNG], 12)
@@ -219,6 +221,8 @@ var row_to_elem = function(row) {
 
 modemap.plot.any(m, content, row_to_elem)
 ```
+
+The resulting plot will show a heavy green line between the start and end points of 200 deliveries. 
 
 ### Radius Functions 
 Radius functions let you dynamically control the radius of points in the `modemap.plot.pts` function. The signature of a radius function is `function(row)` and returns the size of the point to be plotted in pixels. 
