@@ -169,8 +169,17 @@ The resulting plot shows all the starting points in the DoorDash ecosystem color
 ## Advanced Usage 
 
 ### Initializing Maps 
+You can initialize a map on your own using `modemap.init_map`, which has signature `function(map_id, center, default_zoom)`. 
+
+The inputs are 
+  * `map_id` is a string matching the `"unique-id"` of the div associated with this map
+  * `center` is an array `[lat, lng]` denoting the default center of the map when it is plotted
+  * `default_zoom` is an int denoting the default zoom of the map when it is plotted
+  
+The output is a map object. 
 
 ### Getting Query Contents 
+You can directly access the contents of a query result using `modemap.get_query_content`, which has signature `function(query_name)`. The input `query_name` is a string denoting the target query name. The output is a JSON array containing the contents of the query results. 
 
 ### Generic Plotting Function 
 
@@ -234,6 +243,8 @@ You can insert titles for your plot using simple HTML tags inserted directly on 
   corners: [[lat, lng], [lat, lng]]
 }
 ```
+
+The `corners` field is optimized for use with `L.rectangle()` Leaflet function. 
 
 ## Troubleshooting
 * If you have any unrun queries in your list of queries, then no maps will show up, i.e., you will get a Javascript error.
