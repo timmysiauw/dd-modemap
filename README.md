@@ -78,10 +78,10 @@ The output is a map object.
 Between the `<script>` and `</script>` tags, insert 
   
 ```
-modemap.plot.pts('test-points', [37.7338312, -122.417149], 10, '1. delivery locations', 'PICKUP_LAT', 'PICKUP_LNG', null, null, null)
+modemap.plot.pts('example-1', [37.7338312, -122.417149], 10, '1. store locations', 'PICKUP_LAT', 'PICKUP_LNG', null, null, null)
 ```
 
-Note here that `'test-points'` matches the `id` for the `div` containing this map. 
+Note here that `'example-1'` matches the `id` for the `div` containing this map. 
 
 #### Example 2: Using Radius and Color Functions 
 
@@ -100,10 +100,10 @@ var cf = function(row) {
   }
 }
 
-modemap.plot.pts('example-2', [37.7338312, -122.417149], 10, '1. delivery locations', 'PICKUP_LAT', 'PICKUP_LNG', rf, cf, null)
+modemap.plot.pts('example-2', [37.7338312, -122.417149], 10, '1. store locations', 'PICKUP_LAT', 'PICKUP_LNG', rf, cf, null)
 ```
 
-Here, `rf` is a radius function that scales the size of the point proportionately to the number of deliveries from that store. Similarly `cf` is a color function that plots the point in blue if the number of deliveries from that store is less than 1000 and red otherwise. You can read more about radius and color functions in their respective sections in Advanced Usage. 
+Here, `rf` is a radius function that scales the size of the point proportionately to the number of deliveries from that store. Similarly `cf` is a color function that plots the point in blue if the number of deliveries from that store is less than 1000 and red otherwise. You can read more about radius and color functions in their respective sections in [Advanced Usage](https://github.com/timmysiauw/dd-modemap/edit/main/README.md#advanced-usage). 
 
 ### Plotting Geohashes 
 
@@ -120,14 +120,51 @@ The inputs are
   * `val_col` is a string denoting the value associated with that geohash
   * `color_fun` [optional] is a function that controls the color each individual geohash is plotted with. See Color Functions section 
   * `m` [optional] is a map object that the current plot should be added to. Multiple calls to different plotting functions can create more complex maps. 
+  
+The output is a map object. 
 
 Note that each geohash is clickable, which shows a popup of the geohash name and value. 
 
 #### Example 3: Geohashes 
 
+Between the `<script>` and `</script>` tags, insert 
+  
+```
+modemap.plot.ghs('example-3', [37.7338312, -122.417149], 10, '2. geohashes', 'GH', 'VAL', null, null, null)
+```
+
+TODO: Get a better geohash example query. 
 
 ### Plotting GeoJSONS
 
+For plotting geohashes, use `modemap.plot.geojsons`. The functions signature is 
+
+```modemap.plot.geojsons(map_id, center, default_zoom, query_name, geojson_col, val_col, color_fun=null, opacity=null, m=null)``` 
+
+The inputs are
+  * `map_id` is a string matching the `"unique-id"` of the div associated with this map
+  * `center` is an array `[lat, lng]` denoting the default center of the map when it is plotted
+  * `default_zoom` is an int denoting the default zoom of the map when it is plotted
+  * `query_name` is a string matching the Mode query name where data should be pulled from
+  * `geojson_col` is a string denoting the name of the column that identifies geojsons
+  * `val_col` is a string denoting the value associated with that geojson
+  * `color_fun` [optional] is a function that controls the color each individual geojson is plotted with. See Color Functions section 
+  * `m` [optional] is a map object that the current plot should be added to. Multiple calls to different plotting functions can create more complex maps. 
+  
+The output is a map object. 
+
+Note that each geojson is clickable, which shows a popup of the geojson value. 
+
+### Example 4: Geojsons with JET color scheme 
+
+Between the `<script>` and `</script>` tags, insert 
+  
+```
+var cf = modemap.color_fun_factory('jet', 0, 50000, 'DELIVERY_CNT')
+modemap.plot.geojsons('example-4', [37.7338312, -122.417149], 7, '3. geojsons', 'GEOJSON', 'DELIVERY_CNT', cf, null, null)
+```
+
+The resulting plot shows all the starting points in the DoorDash ecosystem colored according to the [Jet](http://matlab.izmiran.ru/help/techdoc/ref/colormap.html) colormap by how many deliveries occurred in a one week period, blue = 0, red = 50000+. 
 
 ## Advanced Usage 
 
