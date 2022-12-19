@@ -170,6 +170,14 @@ The resulting plot shows all the starting points in the DoorDash ecosystem color
 
 ### Generic Plotting Function 
 
+`plot.pts`, `plot.ghs`, `plot.geojsons` are all wrappers around the `plot.any` function, which is a generic and flexible function for plotting any geospatial data that can be handled by Leaflet. 
+
+The signature of the function is 
+
+```
+
+```
+
 
 ### Radius Functions 
 Color and radius functions let you size/color points or color geohashes dynamically based on your SQL results. 
