@@ -10,7 +10,7 @@ All examples in this README can be found [here](https://app.mode.com/editor/door
 In the Mode editor, go to 'Report Builder', then to 'Edit HTML' or the `</>` symbol. Here you can add custom HTML, CSS, and Javascript to your dashboard. A global variable called ```datasets``` is available to any Javascript function, and it contains the results of all your queries. How your results are stored in this data structure is not important, as the functions in this repo abstract that away. 
 
 ## Step 1: Write a Query
-Write a query that contains geospatial information. Some examples are 'lat' and 'lng' columns, 'geohash' and 'value' columns, or `geojson` and `value` columns. However, any geospatial information that can be handled by [Leaflet](https://leafletjs.com/) are plottable. 
+Write a query that contains geospatial information. Some examples are 'lat' and 'lng' columns, 'geohash' and 'value' columns, or 'geojson' and 'value' columns. However, any geospatial information that can be handled by [Leaflet](https://leafletjs.com/) are plottable. 
 
 ## Step 2: Get Leaflet and Mode-Mapping into Your Mode Workspace
 Go to 'Report Builder' --> 'Edit HTML' (or the '</<>' symbol). At the top of the page, cut and paste the following code:
