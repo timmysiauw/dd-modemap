@@ -2,7 +2,7 @@
 Create map plots in mode at DoorDash
 
 ## Context
-These tools allow anyone to write queries containing geospatial information and plot them within a Mode report. Although there are advanced features within these tools, the most common and useful functionalities can be utilized without any programming/Javascript knowledge. PM's welcome! 
+These tools allow anyone to write queries containing geospatial information and plot them within a Mode report. Although there are advanced features within these tools, the most common and useful functionalities can be utilized without any programming/Javascript knowledge.
 
 All examples in this README can be found [here](https://app.mode.com/editor/doordash/reports/dc0e0e49682e/presentation). 
 
@@ -198,9 +198,27 @@ The inputs are
   * `content` is a JSON array containing a query result, i.e., the result of `get_query_content` (See [Getting Query Contents](https://github.com/timmysiauw/dd-modemap/edit/main/README.md#getting-query-contents))
   * `row_to_elem` is a function that takes one element of `content` and returns a Leaflet element that will get added to the map. The signature of `row_to_elem` is `function(row)`, where `row` is an element of the `content` array. 
   
-#### Example 5: Using the `any` Plotter 
+#### Example 5: Any Function 
 
+```
+var center = modemap.get_query_content('zzz. san francisco center')[0]
+var m = modemap.init_map('example-5', [center.LAT, center.LNG], 12)
 
+var content = modemap.get_query_content('4. any')
+
+var row_to_elem = function(row) {
+  console.log([[row['PICKUP_LAT'], row['PICKUP_LNG']], [row['DROPOFF_LAT'], row['DROPOFF_LNG']]])
+  return L.polyline(
+    [[row['PICKUP_LAT'], row['PICKUP_LNG']], [row['DROPOFF_LAT'], row['DROPOFF_LNG']]], 
+    {
+      color: 'green', 
+      weight: 3
+    }
+  )
+}
+
+modemap.plot.any(m, content, row_to_elem)
+```
 
 ### Radius Functions 
 Radius functions let you dynamically control the radius of points in the `modemap.plot.pts` function. The signature of a radius function is `function(row)` and returns the size of the point to be plotted in pixels. 
