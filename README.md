@@ -168,6 +168,10 @@ The resulting plot shows all the starting points in the DoorDash ecosystem color
 
 ## Advanced Usage 
 
+### Initializing Maps 
+
+### Getting Query Contents 
+
 ### Generic Plotting Function 
 
 `plot.pts`, `plot.ghs`, `plot.geojsons` are all wrappers around the `plot.any` function, which is a generic and flexible function for plotting any geospatial data that can be handled by Leaflet. 
@@ -175,26 +179,51 @@ The resulting plot shows all the starting points in the DoorDash ecosystem color
 The signature of the function is 
 
 ```
-
+modemap.plot.any(m, content, row_to_elem)
 ```
+
+The inputs are 
+  * `m` is a map object 
+  * `content` is a JSON array containing a query result, i.e., the result of `get_query_content` (See [Getting Query Contents](https://github.com/timmysiauw/dd-modemap/edit/main/README.md#getting-query-contents))
+  * `row_to_elem` is a function that takes one element of `content` and returns a Leaflet element that will get added to the map. The signature of `row_to_elem` is `function(row)`, where `row` is an element of the `content` array. 
+  
+#### Example 5: Using the `any` Plotter 
+
 
 
 ### Radius Functions 
-Color and radius functions let you size/color points or color geohashes dynamically based on your SQL results. 
-
+Radius functions let you dynamically control the radius of points in the `modemap.plot.pts` function. The signature of a radius function is `function(row)` and returns the size of the point to be plotted in pixels. 
 
 ### Color Functions
-There are a few color function generators already built in to ```modemap```. More to come!
+Color functions let you dynamically control the color of the element being plotted. The signature of a color function is `function(row)` and returns a color for the element to be plotted as a hex value. 
 
-1. ```modemap.color.fun.constant(color)```: takes a color (hex string) and returns a function that will return that color for all plot markers. 
-2. ```modemap.color.fun.jet(val_col, min_val, max_val)```: takes the name of a value column in your query results, ```val_col``` and returns a function that will return a color according to [JET](http://matlab.izmiran.ru/help/techdoc/ref/colormap.html) linear color scheme. Values less than ```min_val``` will be assigned the lowest color value (blue) and values higher than ```max_val``` will be assigned the highest color value (red). 
+#### Colormaps 
+Sometimes it is nice to have color functions that linearly map colors between a min and max value, aka colormaps. Grayscale is a common colormap but there are many, including Jet. Colormaps are particularly useful for creating heatmaps. 
 
-#### Built in colormaps 
+There is currently only one built-in colormap built into `modemap` and that is the [Jet]() colormap. You can create a Jet color function using `modemap.color_fun_factory` which has signature `function(colormap_name, min_val, max_val, val_col)`. 
 
+The inputs are 
+* `colormap_name` is a string denoting the colormap name. Currently this can only be `jet`, but if you have a favorite colormap you'd like included, let me know! 
+* `min_val` is a float representing the left end of the colormap 
+* `max_val` is a float representing the right end of the colormap 
+* `val_col` is the column name where values should be drawn from. 
 
-### Default Center and Default Zoom
+The output is a color function. 
+
+For example, `var cf = modemap.color_fun_factory('jet', 0, 50000, 'DELIVERY_CNT')` will return a color function with the Jet colormap, starting at 0, ending at 50000, and linearly interpolated in between. 
+
+### Getting a Default Center 
+It is often cumbersome to get the default center for a particular plot, especially dynamically. An easy way to get around this is to use a separate query with only one row that contains a lat and lng column to represent the center of your plot. 
+
+For example, see the query "zzz. san francisco center" [TODO: make a better query for this]. 
+
+The center can be retrieved in the workspace using `var center = modemap.get_query_content('zzz. san francisco center')[0]`. Note the the `[0]` at the end, since `get_query_content` returns an array, and we only want the first element. 
+
+Then `[37.7338312, -122.417149]` can be replaced with `[center.LAT, center.LNG]`. 
+
 
 ### Map Titles 
+You can insert titles for your plot using simple HTML tags inserted directly on top of the map `div`. For example, `<h2>Example 1: Simple Plot</h2>` can create a title for the first example map. 
 
 ### Handling Geohashes 
 
