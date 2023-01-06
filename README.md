@@ -73,6 +73,8 @@ The inputs are
   
 The output is a map object. 
 
+Note that clicking on any of the elements will create a popup with the relevant table row information in it. 
+
 #### Example 1: Simple Plot 
 
 Between the `<script>` and `</script>` tags, insert 
@@ -122,6 +124,8 @@ The inputs are
   
 The output is a map object. 
 
+Note that clicking on any of the elements will create a popup with the relevant table row information in it. 
+
 #### Example 3: Geohashes 
 
 Between the `<script>` and `</script>` tags, insert 
@@ -150,7 +154,7 @@ The inputs are
   
 The output is a map object. 
 
-Note that each geojson is clickable, which shows a popup of the geojson value. 
+Note that clicking on any of the elements will create a popup with the relevant table row information in it. 
 
 A GeoJSON column can be created using `ST_ASGEOJSON(TRY_TO_GEOMETRY(geom))`, where `geom` is a [geometry](https://docs.snowflake.com/en/sql-reference/data-types-geospatial.html#geometry-data-type) object commonly found in many GEO_INTELLIGENCE tables. 
 
