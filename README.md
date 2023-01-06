@@ -109,7 +109,7 @@ Here, `rf` is a radius function that scales the size of the point proportionatel
 
 For plotting geohashes, use `modemap.plot.ghs`. The functions signature is 
 
-```modemap.plot.ghs(map_id, center, default_zoom, query_name, gh_col, val_col, color_fun=null, opacity=null, m=null)``` 
+```modemap.plot.ghs(map_id, center, default_zoom, query_name, gh_col, color_fun=null, opacity=null, m=null)``` 
 
 The inputs are
   * `map_id` is a string matching the `"unique-id"` of the div associated with this map
@@ -117,20 +117,17 @@ The inputs are
   * `default_zoom` is an int denoting the default zoom of the map when it is plotted
   * `query_name` is a string matching the Mode query name where data should be pulled from
   * `gh_col` is a string denoting the name of the column that identifies geohashes
-  * `val_col` is a string denoting the value associated with that geohash
   * `color_fun` [optional] is a function that controls the color each individual geohash is plotted with. See Color Functions section 
   * `m` [optional] is a map object that the current plot should be added to. Multiple calls to different plotting functions can create more complex maps. 
   
 The output is a map object. 
-
-Note that each geohash is clickable, which shows a popup of the geohash name and value. 
 
 #### Example 3: Geohashes 
 
 Between the `<script>` and `</script>` tags, insert 
   
 ```
-modemap.plot.ghs('example-3', [37.7338312, -122.417149], 10, '2. geohashes', 'GH', 'VAL', null, null, null)
+modemap.plot.ghs('example-3', [37.7338312, -122.417149], 10, '2. geohashes', 'GH', null, null, null)
 ```
 
 TODO: Get a better geohash example query. 
