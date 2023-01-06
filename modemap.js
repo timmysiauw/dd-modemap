@@ -120,7 +120,7 @@ var modemap = function() {
         return geohash;
     }
     
-    var row_to_popup_str = function() {
+    var row_to_popup_str = function(row) {
         var popup_str = ''
         for (var [key, value] of Object.entries(row)) {
             popup_str += `<p>${key}: ${value}</p>`
