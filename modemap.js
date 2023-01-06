@@ -217,7 +217,7 @@ var modemap = function() {
         return plot_any(m, content, row_to_elem)
     }
 
-    var plot_ghs = function(map_id, center, default_zoom, query_name, gh_col, val_col, color_fun=null, opacity=null, m=null) {
+    var plot_ghs = function(map_id, center, default_zoom, query_name, gh_col, color_fun=null, opacity=null, m=null) {
 
         if (m == null) {
             var m = init_map(map_id, center, default_zoom)
