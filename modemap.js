@@ -119,6 +119,14 @@ var modemap = function() {
         }
         return geohash;
     }
+    
+    var row_to_popup_str = function() {
+        var popup_str = ''
+        for (var [key, value] of Object.entries(row)) {
+            popup_str += `<p>${key}: ${value}</p>`
+        }
+        return popup_str
+    }
 
     // v in colormaps is an int between 0 and 255 (inclusive)
     var colormaps = {
@@ -191,7 +199,7 @@ var modemap = function() {
         var content = get_query_content(query_name)
 
         var row_to_elem = function(row) {
-            return L.circleMarker(
+            var elem = L.circleMarker(
                 [row[lat_col], row[lng_col]],
                 {
                     radius: rad_fun ? rad_fun(row) : 5,
@@ -202,6 +210,8 @@ var modemap = function() {
                     fillColor: color_fun ? color_fun(row) : '#FF0000'
                 }
             )
+            elem.bindPopup(row_to_popup_str(row))
+            return elem
         }
 
         return plot_any(m, content, row_to_elem)
@@ -225,9 +235,7 @@ var modemap = function() {
                     fillColor: color_fun ? color_fun(row) : "#FF0000",
                 }
             )
-
-            elem.bindPopup(row[gh_col] + ': ' + String(row[val_col]))
-
+            elem.bindPopup(row_to_popup_str(row))
             return elem
         }
 
@@ -253,9 +261,7 @@ var modemap = function() {
                     fillColor: color_fun ? color_fun(row) : '#FF0000'
                 }
             )
-
-            elem.bindPopup('value: ' + String(row[val_col]))
-
+            elem.bindPopup(row_to_popup_str(row))
             return elem
         }
 
@@ -276,6 +282,9 @@ var modemap = function() {
             encode: encode,
         },
         color_fun_factory: color_fun_factory,
+        utils: {
+            row_to_popup_str: row_to_popup_str,
+        },
     }
 
 }()
