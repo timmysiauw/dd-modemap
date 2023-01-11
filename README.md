@@ -131,10 +131,8 @@ Note that clicking on any of the elements will create a popup with the relevant 
 Between the `<script>` and `</script>` tags, insert 
   
 ```
-modemap.plot.ghs('example-3', [37.7338312, -122.417149], 10, '2. geohashes', 'GH', null, null, null)
+modemap.plot.ghs('example-3', [37.7338312, -122.417149], 10, '2. geohashes', 'GH5', null, null, null)
 ```
-
-TODO: Get a better geohash example query. 
 
 ### Plotting GeoJSONS
 
